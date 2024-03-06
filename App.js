@@ -1,33 +1,36 @@
 import { useState } from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import StartScreen from "./screens/StartScreen";
 import GuessScreen from "./screens/GuessScreen";
+import Colors from "./constants/colors";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
 
-  function pickedNumberHandler(pickedNumber){
+  function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
   }
 
   let screen = <StartScreen onPickNumber={pickedNumberHandler} />;
 
-  if(userNumber){
-    screen = <GuessScreen/>
+  if (userNumber) {
+    screen = <GuessScreen />;
   }
 
-
   return (
-    <LinearGradient colors={["#4e0329", "#ddb52f"]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.primary700, Colors.accent500]}
+      style={styles.rootScreen}
+    >
       <ImageBackground
         source={require("./assets/images/background.jpg")}
         resizeMeode="cover"
         style={styles.rootScreen}
-        imageStyle = {styles.backgroundImage}
+        imageStyle={styles.backgroundImage}
       >
-        {screen}
+        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
@@ -38,6 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    opacity: 0.55
-  }
+    opacity: 0.55,
+  },
 });
