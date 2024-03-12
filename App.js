@@ -5,18 +5,31 @@ import { LinearGradient } from "expo-linear-gradient";
 import StartScreen from "./screens/StartScreen";
 import GuessScreen from "./screens/GuessScreen";
 import Colors from "./constants/colors";
+import EndScreen from "./screens/EndScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
+  const [gameIsOver, setGameIsOver] = useState(true);
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
+    setGameIsOver(false);
+  }
+
+  function gameOverHandler() {
+    setGameIsOver(true);
   }
 
   let screen = <StartScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GuessScreen userNumber={userNumber} />;
+    screen = (
+      <GuessScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    );
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = <EndScreen />;
   }
 
   return (
