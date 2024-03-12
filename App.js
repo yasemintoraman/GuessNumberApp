@@ -16,7 +16,7 @@ export default function App() {
   let screen = <StartScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GuessScreen />;
+    screen = <GuessScreen userNumber={userNumber} />;
   }
 
   return (
