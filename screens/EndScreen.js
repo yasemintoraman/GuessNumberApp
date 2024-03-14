@@ -7,7 +7,7 @@ import PrimaryButton from '../components/ui/PrimaryButton';
 function EndScreen({roundsNumber, userNumber, onStartNewGame}) {
   return (
   <View style={styles.rootContainer}>
-    <Title>GAME OVER!</Title>
+    <Title>GUESS IS OVER!</Title>
     <View style={styles.imageContainer}> 
       <Image 
         sytle={styles.image} 
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     summaryText: {
-        fontFamily: 'open-sans',
+        fontFamily: 'open-sans-bold',
         fontSize: 24,
         textAlign: 'center',
         marginBottom: 24
