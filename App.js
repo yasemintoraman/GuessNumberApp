@@ -31,6 +31,11 @@ export default function App() {
     setGameIsOver(true);
   }
 
+  function startNewGameHandler(){
+    setUserNumber(null);
+    setGuessRounds(0);
+  }
+
   let screen = <StartScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
@@ -40,7 +45,13 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <EndScreen />;
+    screen = (
+      <EndScreen 
+        userNumber={userNumber} 
+        roundsNumber={guessRounds} 
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (
