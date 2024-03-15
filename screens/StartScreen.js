@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { View, TextInput, StyleSheet, Alert } from "react-native";
+import { View, TextInput, StyleSheet, Alert, useWindowDimensions } from "react-native";
 
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from '../constants/colors';
@@ -9,6 +9,8 @@ import InstructionText from '../components/ui/InstructionText';
 
 function StartScreen({onPickNumber}) {
   const [enteredNumber, setEnteredNumber] = useState('');
+
+  const {width, height} = useWindowDimensions();
 
   function numberInputHandler(enteredText){
     setEnteredNumber(enteredText);
@@ -35,8 +37,11 @@ function StartScreen({onPickNumber}) {
 
   }
 
+  const marginTopDistance = height < 380 ? 30 : 100;
+
   return (
-    <View style={styles.rootContainer}>
+    //if rotate, margin changes
+    <View style={[styles.rootContainer, {marginTop: marginTopDistance}]}>
       <Title>Guess My Number</Title>
       <Card>
         <InstructionText>
@@ -66,10 +71,12 @@ function StartScreen({onPickNumber}) {
 
 export default StartScreen;
 
+//const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    marginTop: 100,
+    //marginTop: deviceHeight < 380 ? 30 : 100,
     alignItems: 'center',
   },
   numberInput: {
